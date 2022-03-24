@@ -4,3 +4,5 @@ Handlebars, and MySQL to create a website for Sprint Stuff.
 
 mysql.txt contains the script to run in MySQL to recreate the database I am
 using. 
+
+Your password for MySQL can be entered on line 4 of connection.js in the mySql folder
