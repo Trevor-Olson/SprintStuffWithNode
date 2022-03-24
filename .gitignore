@@ -1,0 +1,6 @@
+#ignore the password file
+/mySql/password.js
+#ignore the to do file
+/todo.txt
+#ignore the node modules folder
+/node_modules

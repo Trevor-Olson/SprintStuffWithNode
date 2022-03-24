@@ -1,0 +1,16 @@
+<h1>This is the Products Page </h1>
+
+<div class="product-listing">
+    {{#each products}}
+        <div class="product" id={{id}}>
+            <div class="product-image-container">
+                <img class="product-image" 
+                    src = "/images/{{image}}1.jpg" alt="">
+            </div>
+            <p>{{name}}</p>
+            <button class="add-to-cart" data-id="{{id}}">
+                Add to Cart
+            </button>
+        </div>
+    {{/each}}
+</div>

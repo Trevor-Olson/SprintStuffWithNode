@@ -1,0 +1,43 @@
+
+body {
+  margin: auto;
+  height: 100%;
+  width: 100%;
+  max-width: 1200px;
+  background-color: black;
+  text-align: center;
+  color: white;
+  overflow-x: hidden;
+}
+
+.product-image-container{
+  height: 100px;
+  width: 100px;
+  margin: auto;
+  margin-top: 10px;
+  background-color: white;
+  position: relative;
+}
+
+
+.product-image{
+  max-height: 100%;  
+  max-width: 100%;
+  height: auto;
+  width: auto;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.product{
+  height: 200px;
+  width: 150px;
+  display: inline-block;
+  background-color: aqua;
+  color: black;
+  margin: 20px;
+}

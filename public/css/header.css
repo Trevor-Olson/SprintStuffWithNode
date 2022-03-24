@@ -1,0 +1,23 @@
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: blue;
+    height: auto;
+    width: 100%;
+    text-align: center;
+  }
+  #title {
+    color: yellow;
+    font-size: 1.25em;
+    padding-right: 20px;
+  }
+  #navigation a {
+    color: lightgray;
+    text-decoration: none;
+    font-size: 1.1em;
+  }
+  #navigation :hover {
+    background-color: yellow;
+    color: black;
+  }

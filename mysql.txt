@@ -1,0 +1,24 @@
+DROP DATABASE IF EXISTS sprintstuff_db;
+
+CREATE DATABASE IF NOT EXISTS sprintstuff_db;
+
+USE sprintstuff_db;
+
+CREATE TABLE products
+(
+    id          INT unsigned NOT NULL AUTO_INCREMENT,
+    name        VARCHAR(150) NOT NULL,
+    price       INT unsigned,
+    shipping    INT unsigned,
+    image       VARCHAR(150),
+    description VARCHAR(500),
+    PRIMARY KEY (id)
+);
+
+INSERT INTO products ( name, price, shipping, image, description ) VALUES
+    ( "Men's hat", 20, 7, "mens-hat", "100% cotton twill front panels and bill with 100% polyester mesh backing" ),
+    ( "Winged Pull Back", 20, 7, "winged-pullback", "Custom hand painted pull Back toy cars" ),
+    ( "On-Board T-Shirt", 20, 2, "onboard", "100% cotton pre-shrunk men's T-shirt" );
+
+
+

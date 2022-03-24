@@ -1,0 +1,16 @@
+.footer {
+    display: flex;
+    background-color: lightgrey;
+    color: blue;
+    width: 100%;
+    max-width: 1200px;
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+  }
+  footer table{
+    margin: auto;
+  }
+  footer a{
+    color: black;
+  }
