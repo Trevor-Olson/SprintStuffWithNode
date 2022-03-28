@@ -33,7 +33,6 @@ app.set( 'views', './views' );
 // tell express to use routes for routing
 app.use( '/', routes );
 
-
 // tell our server to listen on the given port and log it
 app.listen( port, () => 
 {

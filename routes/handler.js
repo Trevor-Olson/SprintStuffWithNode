@@ -1,7 +1,6 @@
 // this is where all the routes will be handled
 
 const express = require('express');
-const json = require('formidable/src/plugins/json');
 const router = express.Router();
 const orm = require('../mySql/orm');
 
@@ -11,22 +10,34 @@ router.get('/', (req, res) => {
     res.render('index', { title: ' - Home Page' });
 });
 
+// remove the error for a favorite icon
+router.get('/favicon.ico', (req, res) => res.status(204));
+
 // get requests for the products page
 router.get('/products', (req, res) => {
+    // get the search parameters
+    const {category} = req.query;
+    const {type} = req.query;
+    let filters = false;
+    if( category || type )
+    {
+        filters = true;
+    }
     // get the product information from a mySQL database
-    orm.selectAll( function (error, data) {
+    orm.selectAllFiltered( category, type, function (error, data) {
         if (error) {
             return res.status(501).send(
                 '<h1>Unable to Query the database</h1>');
         }
-        console.log( data );
         // render the individual products page
         res.render('./products', {
             title: ` - Products Page`,
             products: data,
+            filters: filters,
         }, (err, html) => {
             if (err) {
                 // if the page can't be found send 404
+                console.log( err );
                 res.status(404).send('<h1>Page doesn\'t exist</h1>');
             }
             else {
@@ -38,12 +49,12 @@ router.get('/products', (req, res) => {
 });
 
 // get requests for all other pages
-router.get('/:page', (req, res) => {
+router.all('/:page', (req, res) => {
     // get the pages name
     let { page } = req.params;
     // give the page name a capitol letter for the title
     let pagename = page[0].toUpperCase() + page.substring(1);
-    res.render(page, { title: ` - ${pagename} Page` }, (err, html) => {
+    res.render( page, { title: ` - ${pagename} Page` }, (err, html) => {
         if (err) {
             // if the page can't be found send 404
             res.status(404).send('<h1>Page doesn\'t exist</h1>');

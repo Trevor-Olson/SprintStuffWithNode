@@ -1,12 +1,27 @@
-<h1>This is the Products Page </h1>
+
+
+
+<h1 id="page-title">Our Products</h1>
+
+<div id="product-navigation">
+    <p class="product-navigation-titles">Categories</p>
+    <p onclick="addUrlParameter('category', 'winged')">winged products</p>
+    <p onclick="addUrlParameter('category', 'non-winged')">non-winged products</p>
+    <p class="product-navigation-titles">Type of Products</p>
+    <p onclick="addUrlParameter('type', 'clothing')">clothing</p>
+    <p onclick="addUrlParameter('type', 'hand-painted')">hand-painted</p>
+    {{#if filters}}
+        <p class="product-navigation-titles" id="clear-filters" 
+            onclick="removeUrlParameters()">Clear All Filters</p>
+    {{/if}}
+</div>
 
 <div class="product-listing">
     {{#each products}}
     <div class="product" id={{id}}>
         <a href="/p/{{id}}">
             <div class="product-image-container">
-                <img class="product-image" src="/images/{{image}}1.jpg" 
-                    alt="">
+                <img class="product-image" src="/images/{{image}}1.jpg" alt="">
             </div>
         </a>
         <p>{{name}}</p>

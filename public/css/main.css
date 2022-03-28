@@ -41,3 +41,31 @@ body {
   color: black;
   margin: 20px;
 }
+
+
+#page-title{
+  width: 80%;
+  float: right;
+}
+
+#product-navigation{
+  height: calc(100vh - 200px);
+  width: 19%;
+  float: left;
+  background-color: aquamarine;
+  color: black;
+  text-align: left;
+  padding-left: 1%;
+}
+
+.product-navigation-titles{
+  text-decoration: none;
+  font-size: large;
+  font-weight: bold;
+  color: black;
+}
+
+#clear-filters{
+  color: #ee0000;
+  font-size: inherit;
+}
