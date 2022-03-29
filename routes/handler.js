@@ -48,6 +48,34 @@ router.get('/products', (req, res) => {
     });
 });
 
+// get requests for the products page
+router.get('/my-cart', (req, res) => {
+    // get the userid
+    const userid = 1;
+    // get the product information from a mySQL database
+    orm.getCart( userid, function (error, data) {
+        if (error) {
+            return res.status(501).send(
+                '<h1>Unable to Query the database</h1>');
+        }
+        // render the users cart
+        res.render('./my-cart', {
+            title: ` - My Shopping Cart`,
+            products: data
+        }, (err, html) => {
+            if (err) {
+                // if the page can't be found send 404
+                console.log( err );
+                res.status(404).send('<h1>Page doesn\'t exist</h1>');
+            }
+            else {
+                // if no error send the page as normal
+                res.send(html);
+            }
+        });
+    });
+});
+
 // get requests for all other pages
 router.all('/:page', (req, res) => {
     // get the pages name
@@ -81,12 +109,7 @@ router.get('/p/:product_id', (req, res) => {
         // render the individual products page
         res.render('./p/individual-product', {
             title: ` - ${pagename} Page`,
-            product_id: product_id,
-            name: pagename,
-            image: data[0].image,
-            description: data[0].description,
-            price: data[0].price,
-            shipping: data[0].shipping,
+            data: data[0]
         }, (err, html) => {
             if (err) {
                 // if the page can't be found send 404
@@ -100,12 +123,35 @@ router.get('/p/:product_id', (req, res) => {
     });
 });
 
+// post requests for adding a product to the cart
+router.post('/addToCart/:product_id', (req, res) => {
+    // get the user's id
+    const userid = 1;
+    // get the product id
+    let { product_id } = req.params;
+    // get the quantity to add
+    const qty = 1;
+    // get the product information from a mySQL database
+    orm.addToCart( userid, product_id, qty );
+    res.redirect( 'back' );
+});
+
+// post requests for removing a product from the cart
+router.post('/removeFromCart/:product_id', (req, res) => {
+    // get the user's id
+    const userid = 1;
+    // get the product id
+    let { product_id } = req.params;
+    // get the product information from a mySQL database
+    orm.removeFromCart( userid, product_id );
+    res.redirect( 'back' );
+});
+
 // covers all non get requests
 router.all('*', (req, res) => {
     // if the page can't be found send 404
     res.status(404).send('<h1>Page doesn\'t exist</h1>');
 });
-
 
 // export the router
 module.exports = router;

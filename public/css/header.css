@@ -1,23 +1,36 @@
 .header {
     display: flex;
-    justify-content: center;
     align-items: center;
     background-color: blue;
     height: 100px;
     width: 100%;
-    text-align: center;
   }
-  #title {
-    color: yellow;
-    font-size: 1.25em;
-    padding-right: 20px;
-  }
-  #navigation a {
-    color: lightgray;
-    text-decoration: none;
-    font-size: 1.1em;
-  }
-  #navigation :hover {
-    background-color: yellow;
-    color: black;
-  }
+
+#title {
+  color: yellow;
+  font-size: 1.75em;
+  padding-right: 20px;
+  padding-left: 20px;
+  width: fit-content;
+  line-height: 0px;
+  float: left;
+  text-align: left;
+}
+
+#navigation{
+  text-align: right;
+  float: right;
+  font-size: 1.1em;
+  margin: auto;
+  width: fit-content;
+}
+
+#navigation a {
+  color: lightgray;
+  text-decoration: none;
+}
+
+#navigation :hover {
+  background-color: yellow;
+  color: black;
+}

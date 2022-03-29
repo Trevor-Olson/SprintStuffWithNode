@@ -10,6 +10,13 @@ body {
   overflow-x: hidden;
 }
 
+#page-title{
+  width: 80%;
+  float: right;
+}
+
+
+/* product page */
 .product-image-container{
   height: 100px;
   width: 100px;
@@ -18,7 +25,6 @@ body {
   background-color: white;
   position: relative;
 }
-
 
 .product-image{
   max-height: 100%;  
@@ -42,12 +48,6 @@ body {
   margin: 20px;
 }
 
-
-#page-title{
-  width: 80%;
-  float: right;
-}
-
 #product-navigation{
   height: calc(100vh - 200px);
   width: 19%;
@@ -69,3 +69,128 @@ body {
   color: #ee0000;
   font-size: inherit;
 }
+
+/*Individual product page*/
+.mini-nav{
+  color: white;
+  text-align: left;
+  width: 100%;
+  margin: 10px;
+}
+
+.mini-nav a{
+  color: white;
+  text-align: left;
+  text-decoration: none;
+  width: 100%;
+}
+
+.mini-nav a:hover{
+  color: lightblue;
+  text-decoration: underline;
+  text-align: left;
+  width: 100%;
+}
+
+.individual-product{
+  height: 500px;
+  width: 500px;
+  max-width: 45%;
+  max-height: calc(100vh - 200px);
+  float: left;
+  background-color: aqua;
+  color: black;
+  margin: 20px;
+}
+
+.individual-product-image-container{
+  height: 95%;
+  width: 95%;
+  margin: auto;
+  margin-top: 10px;
+  background-color: white;
+  position: relative;
+}
+
+.individual-product-image{
+  max-height: 100%;  
+  max-width: 100%;
+  height: auto;
+  width: auto;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+#individual-product-details{
+  height: 500px;
+  width: 500px;
+  max-width: 45%;
+  max-height: calc(100vh - 200px);
+  float: right;
+  text-align: left;
+}
+
+#individual-product-price{
+  color: #ee0000;
+}
+
+#individual-product-name{
+  height: fit-content;
+  overflow-wrap: normal;
+}
+
+
+#individual-product-description{
+  height: fit-content;
+  width: inherit;
+  overflow-wrap: normal;
+}
+
+/* cart page */
+.cart-product-listing{
+  width: fit-content;
+  margin: auto
+}
+
+.cart-product{
+  height: 100px;
+  width: auto;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.cart-product-image-container{
+  height: 100px;
+  width: 100px;
+  margin: auto;
+  margin-top: 10px;
+  background-color: white;
+  position: relative;
+}
+
+.cart-product-image{
+  max-height: 100%;  
+  max-width: 100%;
+  height: auto;
+  width: auto;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.cart-product-description{
+  width: fit-content;
+  padding: 20px;
+  float: right;
+}
+

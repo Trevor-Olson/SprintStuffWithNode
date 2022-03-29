@@ -12,20 +12,31 @@ CREATE TABLE products
     shipping    INT unsigned,
     image       VARCHAR(150),
     description VARCHAR(500),
-    category    ENUM( "winged", "non-winged", "modified" ),
-    type        ENUM( "clothing", "hand-painted" ),
+    category    ENUM( "Winged", "Non-Winged", "Modified" ),
+    type        ENUM( "Clothing", "Hand-Painted" ),
     PRIMARY KEY (id)
 );
 
 INSERT INTO products ( name, price, shipping, image, description, category, type ) 
 VALUES
-    ( "Men's hat", 20, 7, "mens-hat", 
+    ( "Men's Hat", 20, 7, "mens-hat", 
         "100% cotton twill front panels and bill with 100% polyester mesh backing",
-        "winged", "clothing" ),
-    ( "Winged Pull Back", 20, 7, "winged-pullback", "Custom hand painted pull Back toy cars",
-        "winged", "hand-painted" ),
+        "Winged", "Clothing" ),
+    ( "Winged Pull Back", 20, 7, "Winged-pullback", "Custom hand painted pull Back toy cars",
+        "Winged", "Hand-Painted" ),
     ( "On-Board T-Shirt", 20, 2, "onboard", "100% cotton pre-shrunk men's T-shirt",
-        "winged", "clothing" );
+        "Winged", "Clothing" );
+
+CREATE TABLE cart
+(
+    userid      INT unsigned NOT NULL,
+    productid   INT unsigned NOT NULL,
+    quantity    INT unsigned NOT NULL,
+    FOREIGN KEY (productid)
+        REFERENCES products(id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+)
 
 
 

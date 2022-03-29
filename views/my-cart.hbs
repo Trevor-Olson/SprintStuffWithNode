@@ -1,1 +1,21 @@
-<h1> this is my Shopping Cart</h1> 
+<h1> Your Shopping Cart</h1>
+
+<div class="cart-product-listing">
+    {{#each products}}
+    <div class="cart-product" id={{id}}>
+        <a href="/p/{{id}}">
+            <div class="cart-product-image-container">
+                <img class="cart-product-image" src="/images/{{image}}1.jpg" alt="">
+            </div>
+        </a>
+        <div class="cart-product-description">
+            <p>{{name}}</p>
+            Qty: {{quantity}}
+            Total Price: ${{totalprice}}
+        </div>
+        <form method="post" action="/removeFromCart/{{id}}">
+            <button class="remove-from-cart" type="submit">Remove From Cart</button>
+        </form>
+    </div>
+    {{/each}}
+</div>

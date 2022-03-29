@@ -25,9 +25,9 @@
             </div>
         </a>
         <p>{{name}}</p>
-        <button class="add-to-cart" data-id="{{id}}">
-            Add to Cart
-        </button>
+        <form method="post" action="/addToCart/{{id}}">
+            <button class="add-to-cart" type="submit">Add to Cart</button>
+        </form>
     </div>
     {{/each}}
 </div>

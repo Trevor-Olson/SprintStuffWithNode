@@ -1,14 +1,23 @@
-<div class="product" id={{id}}>
-    <div class="product-image-container">
-        <img class="product-image" src="/images/{{image}}1.jpg" alt="">
-    </div>
-    <p>{{name}}</p>
-    <button class="add-to-cart" data-id="{{id}}">
-        Add to Cart
-    </button>
+<div class="mini-nav">
+    <a href="/products">Shop All</a> / 
+    <a href="/products?category={{data.category}}">{{data.category}}</a> / 
+    <a href="/products?category={{data.category}}&type={{data.type}}">{{data.type}}</a> / 
+    {{data.name}}
 </div>
-<div id="product-details">
-    <p>{{description}}</p>
-    <p>Price: ${{price}}</p>
-    <p>Shipping: ${{shipping}}</p>
+
+<div class="individual-product" id={{data.id}}>
+    <div class="individual-product-image-container">
+        <img class="individual-product-image" src="/images/{{data.image}}1.jpg" alt="">
+    </div>
+</div>
+<div id="individual-product-details">
+    <p id="individual-product-price">${{data.price}}</p>
+    <h1 id="individual-product-name">{{data.name}}</h1>
+    <form method="post" action="/addToCart/{{data.id}}">
+        <button class="add-to-cart" type="submit">Add to Cart</button>
+    </form>
+    <div id="individual-product-description">
+        <h4>DESCRIPTION</h4>
+        <p id="individual-product-description">{{data.description}}</p>
+    </div>
 </div>
