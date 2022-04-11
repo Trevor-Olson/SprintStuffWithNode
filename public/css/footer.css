@@ -1,5 +1,5 @@
-.footer {
-    display: flex;
+#footer {
+    display: block;
     background-color: lightgrey;
     color: blue;
     height: 100px;

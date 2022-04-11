@@ -29,7 +29,7 @@ router.get('/products', (req, res) => {
             return res.status(501).send(
                 '<h1>Unable to Query the database</h1>');
         }
-        // render the individual products page
+        // render the products page
         res.render('./products', {
             title: ` - Products Page`,
             products: data,
@@ -48,7 +48,7 @@ router.get('/products', (req, res) => {
     });
 });
 
-// get requests for the products page
+// get requests for the cart page
 router.get('/my-cart', (req, res) => {
     // get the userid
     const userid = 1;

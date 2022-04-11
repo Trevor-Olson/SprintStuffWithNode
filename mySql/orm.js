@@ -80,7 +80,7 @@ const orm = {
         });
     },
     getCart( userid, cb ){
-        const sqlQuery = `SELECT p.id, p.name, p.image, p.price, c.quantity, 
+        const sqlQuery = `SELECT p.id, p.name, p.category, p.type, p.image, p.price, c.quantity, 
             p.price * c.quantity AS "totalprice"
             FROM products AS p JOIN cart c ON p.id = c.productid
             WHERE c.userid = ${userid};`;

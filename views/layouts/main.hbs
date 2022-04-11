@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,14 +10,20 @@
     <link rel="Stylesheet" type="text/css" href="/css/header.css">
     <link rel="Stylesheet" type="text/css" href="/css/footer.css">
 </head>
-<header>
-    {{>header}}
-</header>
+
 <body>
-    {{{body}}} 
+    <header id="header">
+        {{>header}}
+    </header>
+    <div id="page-container">
+    <div id="content">
+        {{{body}}}
+    </div>
+    <footer id="footer">
+        {{>footer}}
+    </footer>
+    </div>
     <script type="text/javascript" src="/src/params.js"></script>
 </body>
-<footer>
-    {{>footer}}
-</footer>
+
 </html>
