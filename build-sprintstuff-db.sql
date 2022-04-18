@@ -19,14 +19,14 @@ CREATE TABLE products
 
 INSERT INTO products ( name, price, shipping, image, description, category, type ) 
 VALUES
-    ( "Men's Hat", 20, 7, "mens-hat", 
+        ( "Men's Hat", 20, 7, "mens-hat", 
         "100% cotton twill front panels and bill with 100% polyester mesh backing",
         "Winged", "Clothing" ),
-    ( "Winged Pull Back", 20, 7, "Winged-pullback", "Custom hand painted pull Back toy cars",
+        ( "Winged Pull Back", 20, 7, "Winged-pullback", "Custom hand painted pull Back toy cars",
         "Winged", "Hand-Painted" ),
-    ( "On-Board T-Shirt", 20, 2, "onboard", "100% cotton pre-shrunk men's T-shirt",
+        ( "On-Board T-Shirt", 20, 2, "onboard", "100% cotton pre-shrunk men's T-shirt",
         "Winged", "Clothing" ),
-	( "1/24th Racing Champion", 100, 10, "1-24-winged", "All Sponsor's are recaptured EXCEPT contingency decals",
+        ( "1/24th Racing Champion", 100, 10, "1-24-winged", "All Sponsor's are recaptured EXCEPT contingency decals",
         "Winged", "Hand-Painted" ),
 	( "1/18th GMP", 200, 15, "1-18-winged", "All Sponsor's are recaptured EXCEPT contingency decals",
         "Winged", "Hand-Painted" ),
