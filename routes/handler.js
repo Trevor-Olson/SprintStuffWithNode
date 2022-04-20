@@ -35,7 +35,8 @@ router.get('/products', (req, res) => {
             products: data,
             filters: filters,
             category: category,
-            type: type
+            type: type,
+            style: "/css/products.css"
         }, (err, html) => {
             if (err) {
                 // if the page can't be found send 404
@@ -63,7 +64,8 @@ router.get('/my-cart', (req, res) => {
         // render the users cart
         res.render('./my-cart', {
             title: ` - My Shopping Cart`,
-            products: data
+            products: data,
+            style: "/css/my-cart.css"
         }, (err, html) => {
             if (err) {
                 // if the page can't be found send 404
@@ -111,7 +113,8 @@ router.get('/p/:product_id', (req, res) => {
         // render the individual products page
         res.render('./p/individual-product', {
             title: ` - ${pagename} Page`,
-            data: data[0]
+            data: data[0],
+            style: "/css/individual-products.css"
         }, (err, html) => {
             if (err) {
                 // if the page can't be found send 404
