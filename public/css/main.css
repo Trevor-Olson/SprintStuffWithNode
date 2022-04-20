@@ -16,7 +16,8 @@ body {
 #page-container{
   position: relative;
   min-height: calc(100vh - 100px);
-  background-color: black;
+  background-color: rgba(0,0,0,0.8);
+  opacity: .9;
 }
 
 #content{

@@ -10,9 +10,6 @@ router.get('/', (req, res) => {
     res.render('index', { title: ' - Home Page' });
 });
 
-// remove the error for a favorite icon
-router.get('/favicon.ico', (req, res) => res.status(204));
-
 // get requests for the products page
 router.get('/products', (req, res) => {
     // get the search parameters
