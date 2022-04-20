@@ -5,7 +5,9 @@ body {
   height: 100vh;
   width: 100%;
   max-width: 1200px;
-  background-color: black;
+  background-image: url("/images/background.jpg");
+  background-size: cover;
+  background-color: azure;
   text-align: center;
   color: white;
   overflow-x: hidden;
@@ -14,6 +16,7 @@ body {
 #page-container{
   position: relative;
   min-height: calc(100vh - 100px);
+  background-color: black;
 }
 
 #content{
@@ -21,6 +24,6 @@ body {
 }
 
 #page-title{
-  width: 80%;
-  float: right;
+  width: 100%;
+  display: inline-block;
 }

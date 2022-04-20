@@ -1,4 +1,9 @@
 /* product page */
+#page-title{
+  width: 80%;
+  float: right;
+}
+
 #product-navigation{
     min-height: calc(100vh - 100px);
     width: 19%;
