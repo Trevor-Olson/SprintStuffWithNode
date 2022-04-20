@@ -36,7 +36,7 @@ const orm = {
         });
     },
     getProduct( id, cb ) {
-        const sqlQuery = `SELECT * FROM products WHERE id = ${id};`;
+        const sqlQuery = `SELECT * FROM products WHERE product_id = ${id};`;
         connection.query( sqlQuery, function(err, data) {
             if(err){
                 cb(err, null);
@@ -46,44 +46,44 @@ const orm = {
     },
     addToCart( userid, productid, qty ) {
         // check if product is in the cart
-        let sqlQuery = `SELECT quantity FROM cart WHERE userid = ${userid} AND
-            productid = ${productid};`;
+        let sqlQuery = `SELECT quantity FROM cart WHERE user_id = ${userid} AND
+            product_id = ${productid};`;
         connection.query( sqlQuery, function(err, data) {
             if( data.length === 0 )
             {
-                sqlQuery = `INSERT INTO cart ( userid, productid, quantity ) VALUES
+                sqlQuery = `INSERT INTO cart ( user_id, product_id, quantity ) VALUES
                 ( ${userid}, ${productid}, ${qty} );`
                 connection.query( sqlQuery );
             }
             else{
                 let quantity = qty + data[0].quantity;
                 sqlQuery = `UPDATE cart SET quantity = ${quantity} WHERE 
-                    userid = ${userid} AND productid = ${productid};`
+                    user_id = ${userid} AND product_id = ${productid};`
                 connection.query( sqlQuery );
             }
         });
     },
     removeFromCart( userid, productid ) {
         // check if product is in the cart
-        let sqlQuery = `SELECT quantity FROM cart WHERE userid = ${userid} AND
-            productid = ${productid};`;
+        let sqlQuery = `SELECT quantity FROM cart WHERE user_id = ${userid} AND
+            product_id = ${productid};`;
         connection.query( sqlQuery, function(err, data) {
             if( data.length === 0 )
             {
                 return;
             }
             else{
-                sqlQuery = `DELETE FROM cart WHERE userid = ${userid} AND
-                    productid = ${productid};`
+                sqlQuery = `DELETE FROM cart WHERE user_id = ${userid} AND
+                    product_id = ${productid};`
                 connection.query( sqlQuery );
             }
         });
     },
     getCart( userid, cb ){
-        const sqlQuery = `SELECT p.id, p.name, p.category, p.type, p.image, p.price, c.quantity, 
+        const sqlQuery = `SELECT p.product_id, p.name, p.category, p.type, p.image, p.price, c.quantity, 
             p.price * c.quantity AS "totalprice"
-            FROM products AS p JOIN cart c ON p.id = c.productid
-            WHERE c.userid = ${userid};`;
+            FROM products AS p JOIN cart c ON p.product_id = c.product_id
+            WHERE c.user_id = ${userid};`;
         connection.query( sqlQuery, function(err, data){
             if(err){
                 cb(err, null);

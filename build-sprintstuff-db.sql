@@ -6,7 +6,7 @@ USE sprintstuff_db;
 
 CREATE TABLE products
 (
-    id          INT unsigned NOT NULL AUTO_INCREMENT,
+    product_id	INT unsigned NOT NULL AUTO_INCREMENT,
     name        VARCHAR(150) NOT NULL,
     price       INT unsigned,
     shipping    INT unsigned,
@@ -14,7 +14,7 @@ CREATE TABLE products
     description VARCHAR(500),
     category    ENUM( "Winged", "Non-Winged", "Modified" ),
     type        ENUM( "Clothing", "Hand-Painted" ),
-    PRIMARY KEY (id)
+    PRIMARY KEY (product_id)
 );
 
 INSERT INTO products ( name, price, shipping, image, description, category, type ) 
@@ -41,14 +41,60 @@ VALUES
 
 CREATE TABLE cart
 (
-    userid      INT unsigned NOT NULL,
-    productid   INT unsigned NOT NULL,
+    user_id      INT unsigned NOT NULL,
+    product_id   INT unsigned NOT NULL,
     quantity    INT unsigned NOT NULL,
-    FOREIGN KEY (productid)
-        REFERENCES products(id)
+    PRIMARY KEY (user_id),
+    FOREIGN KEY (product_id)
+        REFERENCES products(product_id)
         ON DELETE CASCADE
         ON UPDATE CASCADE
-)
+);
+
+CREATE TABLE colors
+(
+	product_id	INT unsigned NOT NULL,
+    color_id	INT unsigned NOT NULL AUTO_INCREMENT,
+    color_name	VARCHAR(150) NOT NULL,
+	PRIMARY KEY (color_id),
+    FOREIGN KEY (product_id)
+        REFERENCES products(product_id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+);
+
+INSERT INTO colors ( product_id, color_name ) VALUES
+	( 1, "Black with Flourescent Orange"),
+    ( 3, "Black and White"),
+	( 8, "Black"  );
+
+CREATE TABLE sizes
+(
+	product_id      INT unsigned NOT NULL,
+        is_youth	BOOLEAN DEFAULT False,
+        extra_small	BOOLEAN DEFAULT False,
+        small		BOOLEAN DEFAULT False,
+        medium		BOOLEAN DEFAULT False,
+        large		BOOLEAN DEFAULT False,
+        extra_large	BOOLEAN DEFAULT False,
+        xx_large	BOOLEAN DEFAULT False,
+        xxx_large	BOOLEAN DEFAULT False,
+        xxxx_large	BOOLEAN DEFAULT False,
+        one_size	BOOLEAN DEFAULT False,
+	PRIMARY KEY (product_id),
+        FOREIGN KEY (product_id)
+                REFERENCES products(product_id)
+                ON DELETE CASCADE
+                ON UPDATE CASCADE
+);
+
+INSERT INTO sizes ( product_id, is_youth, extra_small, small, medium, large, extra_large,
+	xx_large, xxx_large, xxxx_large, one_size) VALUES
+    ( 1, False, False, False, False, False, False, False, False, False, True  ),
+    ( 3, False, False, True, True, True, True, True, True, False, False  ),
+	( 8, True, True, True, True, True, False, False, False, False, False  );
+
+
 
 
 

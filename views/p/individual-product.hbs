@@ -5,7 +5,7 @@
     {{data.name}}
 </div>
 
-<div class="individual-product" id={{data.id}}>
+<div class="individual-product" id={{data.product_id}}>
     <div class="individual-product-image-container">
         <img class="individual-product-image" 
             src="/images/products/{{data.category}}/{{data.type}}/{{data.image}}1.jpg" 
@@ -15,7 +15,7 @@
 <div id="individual-product-details">
     <p id="individual-product-price">${{data.price}}</p>
     <h1 id="individual-product-name">{{data.name}}</h1>
-    <form method="post" action="/addToCart/{{data.id}}">
+    <form method="post" action="/addToCart/{{data.product_id}}">
         <button class="add-to-cart" type="submit">Add to Cart</button>
     </form>
     <div id="individual-product-description">
