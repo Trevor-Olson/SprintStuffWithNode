@@ -1,15 +1,27 @@
 
 
 
-<h1 id="page-title">Our Products</h1>
+{{#if filters}}
+    <h1 id="page-title">{{category}} {{type}} Products</h1>
+    {{else}}
+        <h1 id="page-title">All Products</h1>
+{{/if}}
 
 <div id="product-navigation">
     <p class="product-navigation-titles">Categories</p>
-    <p onclick="addUrlParameter('category', 'winged')">winged products</p>
-    <p onclick="addUrlParameter('category', 'non-winged')">non-winged products</p>
+    <input type="checkbox" onclick="editUrlParameter('category', 'Winged')"
+    id="Winged">
+    <label>Winged Sprint Cars</label><br>
+    <input type="checkbox" onclick="editUrlParameter('category', 'Non-Winged')"
+    id="Non-Winged">
+    <label>Non-Winged Sprint Cars</label>
     <p class="product-navigation-titles">Type of Products</p>
-    <p onclick="addUrlParameter('type', 'clothing')">clothing</p>
-    <p onclick="addUrlParameter('type', 'hand-painted')">hand-painted</p>
+    <input type="checkbox" onclick="editUrlParameter('type', 'Clothing')"
+    id="Clothing">
+    <label>Clothing</label><br>
+    <input type="checkbox" onclick="editUrlParameter('type', 'Hand-Painted')"
+    id="Hand-Painted">
+    <label>Hand-Painted</label>
     {{#if filters}}
         <p class="product-navigation-titles" id="clear-filters" 
             onclick="removeUrlParameters()">Clear All Filters</p>
@@ -27,9 +39,29 @@
             </div>
         </a>
         <p>{{name}}</p>
-        <form method="post" action="/addToCart/{{id}}">
-            <button class="add-to-cart" type="submit">Add to Cart</button>
-        </form>
     </div>
     {{/each}}
 </div>
+
+<script type="text/javascript">
+    function isChecked(){
+        var searchParams = new URLSearchParams(window.location.search)
+        if( searchParams.get( 'category' ) == 'Winged' )
+        {
+            document.getElementById('Winged').setAttribute('checked', 'true')
+        }
+        else if( searchParams.get( 'category' ) == 'Non-Winged' )
+        {
+            document.getElementById('Non-Winged').setAttribute('checked', 'true')
+        }
+        if( searchParams.get( 'type' ) == 'Clothing' )
+        {
+            document.getElementById('Clothing').setAttribute('checked', 'true')
+        }
+        else if( searchParams.get( 'type' ) == 'Hand-Painted' )
+        {
+            document.getElementById('Hand-Painted').setAttribute('checked', 'true')
+        }
+    }
+    window.onchange = isChecked();
+</script>

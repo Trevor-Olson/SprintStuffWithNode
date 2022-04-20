@@ -34,6 +34,8 @@ router.get('/products', (req, res) => {
             title: ` - Products Page`,
             products: data,
             filters: filters,
+            category: category,
+            type: type
         }, (err, html) => {
             if (err) {
                 // if the page can't be found send 404

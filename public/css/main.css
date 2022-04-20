@@ -54,14 +54,13 @@ body {
 }
 
 .product{
-  height: 200px;
+  height: 180px;
   width: 150px;
   display: inline-table;
   background-color: aqua;
   color: black;
   margin: 20px;
 }
-
 .product-image-container{
   height: 100px;
   width: 100px;
@@ -71,9 +70,10 @@ body {
   position: relative;
 }
 
+
 .product-image{
-  max-height: 100%;  
-  max-width: 100%;
+  max-height: 100px;  
+  max-width: 100px;
   height: auto;
   width: auto;
   position: absolute;
