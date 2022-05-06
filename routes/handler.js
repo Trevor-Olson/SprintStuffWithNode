@@ -10,9 +10,6 @@ router.get('/', (req, res) => {
     res.render('index', { title: ' - Home Page' });
 });
 
-// remove the error for a favorite icon
-router.get('/favicon.ico', (req, res) => res.status(204));
-
 // get requests for the products page
 router.get('/products', (req, res) => {
     // get the search parameters
@@ -80,7 +77,7 @@ router.get('/my-cart', (req, res) => {
     });
 });
 
-// get requests for all other pages
+// get requests for all other main pages
 router.all('/:page', (req, res) => {
     // get the pages name
     let { page } = req.params;
@@ -134,10 +131,14 @@ router.post('/addToCart/:product_id', (req, res) => {
     const userid = 1;
     // get the product id
     let { product_id } = req.params;
-    // get the quantity to add
-    const qty = 1;
+    // get the size of the size
+    const {size} = req.query;
+    // get the color of the size
+    const {color} = req.query;
+    // get the quantity of the size
+    const {quantity} = req.query;
     // get the product information from a mySQL database
-    orm.addToCart( userid, product_id, qty );
+    orm.addToCart( userid, product_id, quantity, size, color );
     res.redirect( 'back' );
 });
 

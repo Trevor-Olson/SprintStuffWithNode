@@ -1,6 +1,7 @@
 const express = require( 'express' );
 const { create } = require( 'express-handlebars' );
 const path = require( 'path' );
+const { options } = require('./routes/handler');
 
 // get the route handler
 const routes = require( "./routes/handler" );
@@ -18,7 +19,19 @@ const hbs = create({
     // set the directory for the partials
     partialsDir: path.join( __dirname, 'views/partials' ),
     // change the extension name from handlebars to hbs
-    extname: '.hbs'
+    extname: '.hbs',
+    // add helper function to see if two values are equal
+    helpers: {
+        ifCond: function( v1, op, v2, options ){
+            switch( op ){
+                case '==':
+                    return v1 == v2 ? options.fn(this): options.inverse(this)
+                case '!=':
+                    return v1 != v2 ? options.fn(this): options.inverse(this)
+            }
+            
+        }
+    }
 });
 
 // tells express where to look for static files

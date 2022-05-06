@@ -35,30 +35,68 @@ const orm = {
             cb(null, data);
         });
     },
-    getProduct( id, cb ) {
+    async getProduct( id, cb ) {
         const sqlQuery = `SELECT * FROM products WHERE product_id = ${id};`;
         connection.query( sqlQuery, function(err, data) {
             if(err){
                 cb(err, null);
             }
-            cb(null, data);
+            if( data[0].type == 'Clothing' )
+            {
+                // get the sizes
+                const sizeQuery = `SELECT s.* FROM sizes as s 
+                JOIN products as p ON s.product_id = p.product_id
+                WHERE p.product_id = ${id};`;
+                connection.query( sizeQuery, function(err, sizeData) {
+                    if(err){
+                        cb(err, null);
+                    }
+                    data[0]['sizes'] = sizeData[0];
+                    // get the colors
+                    const colorQuery = `SELECT c.* FROM colors as c 
+                    JOIN products as p ON c.product_id = p.product_id
+                    WHERE p.product_id = ${id};`;
+                    connection.query( colorQuery, function(err, colorData) {
+                        if(err){
+                            cb(err, null);
+                        }
+                        data[0]['colors'] = colorData[0];
+                        cb( null, data )
+                    })
+                })
+            }
+            else
+            {
+                cb( null, data )
+            }
         });
     },
-    addToCart( userid, productid, qty ) {
+    addToCart( userid, productid, qty = 1, size = null, color = null ) {
         // check if product is in the cart
-        let sqlQuery = `SELECT quantity FROM cart WHERE user_id = ${userid} AND
-            product_id = ${productid};`;
+        let sqlQuery = `SELECT quantity FROM cart 
+                        WHERE user_id = ${userid} 
+                            AND product_id = ${productid}
+                            AND size IS ${size}
+                            AND color_id IS ${color};`;
         connection.query( sqlQuery, function(err, data) {
+            if( err )
+            {
+                console.log( err );
+            }
             if( data.length === 0 )
             {
-                sqlQuery = `INSERT INTO cart ( user_id, product_id, quantity ) VALUES
-                ( ${userid}, ${productid}, ${qty} );`
+                sqlQuery = `INSERT INTO cart ( user_id, product_id, quantity, 
+                    size, color_id ) VALUES
+                    ( ${userid}, ${productid}, ${qty}, ${size}, ${color} );`
                 connection.query( sqlQuery );
             }
             else{
                 let quantity = qty + data[0].quantity;
-                sqlQuery = `UPDATE cart SET quantity = ${quantity} WHERE 
-                    user_id = ${userid} AND product_id = ${productid};`
+                sqlQuery = `UPDATE cart SET quantity = ${quantity} 
+                WHERE user_id = ${userid} 
+                    AND product_id = ${productid}
+                    AND size = ${size}
+                    AND color_id = ${color};`
                 connection.query( sqlQuery );
             }
         });

@@ -43,8 +43,9 @@ CREATE TABLE cart
 (
     user_id      INT unsigned NOT NULL,
     product_id   INT unsigned NOT NULL,
-    quantity    INT unsigned NOT NULL,
-    PRIMARY KEY (user_id),
+    quantity     INT unsigned NOT NULL,
+    size         VARCHAR(10),
+    color_id	 INT unsigned,
     FOREIGN KEY (product_id)
         REFERENCES products(product_id)
         ON DELETE CASCADE
@@ -53,14 +54,14 @@ CREATE TABLE cart
 
 CREATE TABLE colors
 (
-	product_id	INT unsigned NOT NULL,
+    product_id	INT unsigned NOT NULL,
     color_id	INT unsigned NOT NULL AUTO_INCREMENT,
     color_name	VARCHAR(150) NOT NULL,
 	PRIMARY KEY (color_id),
-    FOREIGN KEY (product_id)
-        REFERENCES products(product_id)
-        ON DELETE CASCADE
-        ON UPDATE CASCADE
+        FOREIGN KEY (product_id)
+            REFERENCES products(product_id)
+            ON DELETE CASCADE
+            ON UPDATE CASCADE
 );
 
 INSERT INTO colors ( product_id, color_name ) VALUES
@@ -72,14 +73,14 @@ CREATE TABLE sizes
 (
 	product_id      INT unsigned NOT NULL,
         is_youth	BOOLEAN DEFAULT False,
-        extra_small	BOOLEAN DEFAULT False,
-        small		BOOLEAN DEFAULT False,
-        medium		BOOLEAN DEFAULT False,
-        large		BOOLEAN DEFAULT False,
-        extra_large	BOOLEAN DEFAULT False,
-        xx_large	BOOLEAN DEFAULT False,
-        xxx_large	BOOLEAN DEFAULT False,
-        xxxx_large	BOOLEAN DEFAULT False,
+        XS      	BOOLEAN DEFAULT False,
+        SM		BOOLEAN DEFAULT False,
+        MED		BOOLEAN DEFAULT False,
+        LRG		BOOLEAN DEFAULT False,
+        XL	        BOOLEAN DEFAULT False,
+        2XL	        BOOLEAN DEFAULT False,
+        3XL	        BOOLEAN DEFAULT False,
+        4XL	        BOOLEAN DEFAULT False,
         one_size	BOOLEAN DEFAULT False,
 	PRIMARY KEY (product_id),
         FOREIGN KEY (product_id)
@@ -88,8 +89,8 @@ CREATE TABLE sizes
                 ON UPDATE CASCADE
 );
 
-INSERT INTO sizes ( product_id, is_youth, extra_small, small, medium, large, extra_large,
-	xx_large, xxx_large, xxxx_large, one_size) VALUES
+INSERT INTO sizes ( product_id, is_youth, XS, SM, MED, LRG, XL,
+	2XL, 3XL, 4XL, one_size) VALUES
     ( 1, False, False, False, False, False, False, False, False, False, True  ),
     ( 3, False, False, True, True, True, True, True, True, False, False  ),
 	( 8, True, True, True, True, True, False, False, False, False, False  );
