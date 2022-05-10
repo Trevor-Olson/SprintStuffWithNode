@@ -53,14 +53,18 @@ const orm = {
                     }
                     data[0]['sizes'] = sizeData[0];
                     // get the colors
-                    const colorQuery = `SELECT c.* FROM colors as c 
+                    const colorQuery = `SELECT c.color_id, c.color_name FROM colors as c 
                     JOIN products as p ON c.product_id = p.product_id
                     WHERE p.product_id = ${id};`;
                     connection.query( colorQuery, function(err, colorData) {
                         if(err){
                             cb(err, null);
                         }
-                        data[0]['colors'] = colorData[0];
+                        data[0]['colors'] = {}
+                        for( d in colorData )
+                        {
+                            data[0]['colors'][colorData[d].color_id] = colorData[d].color_name;
+                        }
                         cb( null, data )
                     })
                 })
@@ -73,11 +77,22 @@ const orm = {
     },
     addToCart( userid, productid, qty = 1, size = null, color = null ) {
         // check if product is in the cart
-        let sqlQuery = `SELECT quantity FROM cart 
-                        WHERE user_id = ${userid} 
+        let sqlQuery = '';
+        // if it doesn't have a size or a color change the query
+        if( size == null && color == null )
+        {
+            sqlQuery = `SELECT quantity FROM cart 
+                            WHERE user_id = ${userid} 
+                            AND product_id = ${productid};`;
+        }
+        else
+        {
+            sqlQuery = `SELECT quantity FROM cart 
+                            WHERE user_id = ${userid} 
                             AND product_id = ${productid}
-                            AND size IS ${size}
-                            AND color_id IS ${color};`;
+                            AND size = "${size}"
+                            AND color_id = ${color};`;
+        }
         connection.query( sqlQuery, function(err, data) {
             if( err )
             {
@@ -87,7 +102,7 @@ const orm = {
             {
                 sqlQuery = `INSERT INTO cart ( user_id, product_id, quantity, 
                     size, color_id ) VALUES
-                    ( ${userid}, ${productid}, ${qty}, ${size}, ${color} );`
+                    ( ${userid}, ${productid}, ${qty}, "${size}", ${color} );`
                 connection.query( sqlQuery );
             }
             else{
@@ -95,7 +110,7 @@ const orm = {
                 sqlQuery = `UPDATE cart SET quantity = ${quantity} 
                 WHERE user_id = ${userid} 
                     AND product_id = ${productid}
-                    AND size = ${size}
+                    AND size = "${size}"
                     AND color_id = ${color};`
                 connection.query( sqlQuery );
             }

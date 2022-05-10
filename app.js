@@ -42,6 +42,13 @@ app.set( 'view engine', '.hbs' );
 // explicit setting the directory to the views folder
 // default value is ./views
 app.set( 'views', './views' );
+
+// allows post request data to be accessed
+// parses post request data sent in json format
+app.use( express.json() );
+// parses post request with url encoded format
+app.use( express.urlencoded( {extended: true} ) );
+
 // tell express to use routes for routing
 app.use( '/', routes );
 

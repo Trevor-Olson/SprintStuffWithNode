@@ -20,29 +20,39 @@
         <h4>DESCRIPTION</h4>
         <p id="individual-product-description">{{data.description}}</p>
     </div>
- 
-    {{#ifCond data.type '==' 'Clothing'}}
-        {{#ifCond data.sizes.is_youth '==' 1 }}
-            <h4>YOUTH SIZES:</h4>
-        {{else}}
-            <h4>ADULT SIZES:</h4>
-        {{/ifCond}}
-        <form id="to-cart" method="post" action="/addToCart/{{data.product_id}}">
-        {{#each data.sizes as |value key| }}
-            {{#ifCond key '!=' 'product_id'}}
-                {{#ifCond key '!=' 'is_youth'}}
-                    {{#ifCond value '==' 1}}
-                        <input type="radio" name="size" id={{key}} value={{key}}>
-                        <label for={{key}}>{{key}}</label>
+    <form id="to-cart" method="post" action="/addToCart/{{data.product_id}}">
+        {{#ifCond data.type '==' 'Clothing'}}
+            {{#ifCond data.sizes.is_youth '==' 1 }}
+                <h4>YOUTH SIZES:</h4>
+            {{else}}
+                <h4>ADULT SIZES:</h4>
+            {{/ifCond}}
+            <!-- size select -->
+            {{#each data.sizes as |value key| }}
+                {{#ifCond key '!=' 'product_id'}}
+                    {{#ifCond key '!=' 'is_youth'}}
+                        {{#ifCond value '==' 1}}
+                            <input type="radio" name="size" id="{{key}}" 
+                                value="{{key}}" checked>
+                            <label for={{key}}>{{key}}</label>
+                        {{/ifCond}}
                     {{/ifCond}}
                 {{/ifCond}}
-            {{/ifCond}}
-        {{/each}}
-            <br><br><button class="add-to-cart" type="submit">Add to Cart</button>
-        </form>
-    {{else}}
-        <form method="post" action="/addToCart/{{data.product_id}}">
-            <button class="add-to-cart" type="submit">Add to Cart</button>
-        </form>
-    {{/ifCond}}
+            {{/each}}
+            <!-- color select -->
+            <h4>COLORS:</h4>
+            {{#each data.colors as |value key| }}
+                {{#ifCond key '!=' 'color_id'}}
+                    <input type="radio" name="color" id="{{key}}" 
+                        value="{{key}}" checked>
+                    <label for={{key}}>{{value}}</label>
+                {{/ifCond}}
+            {{/each}}       
+        {{/ifCond}}
+        <!-- Quantity -->
+        <h4>QUANTITY:</h4>
+        <input type="number" name="quantity" min="1" max="100" value="1">
+        <input type="hidden" name="product_id" value="{{data.product_id}}">
+        <br><br><button class="add-to-cart" type="submit">Add to Cart</button>
+    </form>
 </div>
