@@ -1,7 +1,6 @@
 const express = require( 'express' );
 const { create } = require( 'express-handlebars' );
 const path = require( 'path' );
-const { options } = require('./routes/handler');
 
 // get the route handler
 const routes = require( "./routes/handler" );

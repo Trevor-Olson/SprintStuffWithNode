@@ -39,17 +39,15 @@ VALUES
 	( "9\" Hangers", 40, 8, "modified-hanger", "9\" hanger can be customized to look like your car with your name and number",
         "Modified", "Hand-Painted" );
 
-CREATE TABLE cart
-(
-    user_id      INT unsigned NOT NULL,
-    product_id   INT unsigned NOT NULL,
-    quantity     INT unsigned NOT NULL,
-    size         VARCHAR(10),
-    color_id	 INT unsigned,
+CREATE TABLE cart (
+    user_id INT UNSIGNED NOT NULL,
+    product_id INT UNSIGNED NOT NULL,
+    quantity INT UNSIGNED NOT NULL,
+    size VARCHAR(10),
+    color_id INT UNSIGNED,
     FOREIGN KEY (product_id)
-        REFERENCES products(product_id)
-        ON DELETE CASCADE
-        ON UPDATE CASCADE
+        REFERENCES products (product_id)
+        ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE colors
@@ -71,17 +69,17 @@ INSERT INTO colors ( product_id, color_name ) VALUES
 
 CREATE TABLE sizes
 (
-	product_id      INT unsigned NOT NULL,
-        is_youth	BOOLEAN DEFAULT False,
-        XS      	BOOLEAN DEFAULT False,
-        SM		BOOLEAN DEFAULT False,
-        MED		BOOLEAN DEFAULT False,
-        LRG		BOOLEAN DEFAULT False,
-        XL	        BOOLEAN DEFAULT False,
-        2XL	        BOOLEAN DEFAULT False,
-        3XL	        BOOLEAN DEFAULT False,
-        4XL	        BOOLEAN DEFAULT False,
-        one_size	BOOLEAN DEFAULT False,
+	product_id  INT unsigned NOT NULL,
+	is_youth	BOOLEAN DEFAULT False,
+    XS      	BOOLEAN DEFAULT False,
+    SM			BOOLEAN DEFAULT False,
+    MED			BOOLEAN DEFAULT False,
+    LRG			BOOLEAN DEFAULT False,
+    XL	        BOOLEAN DEFAULT False,
+    2XL	        BOOLEAN DEFAULT False,
+    3XL	        BOOLEAN DEFAULT False,
+    4XL	        BOOLEAN DEFAULT False,
+    one_size	BOOLEAN DEFAULT False,
 	PRIMARY KEY (product_id),
         FOREIGN KEY (product_id)
                 REFERENCES products(product_id)

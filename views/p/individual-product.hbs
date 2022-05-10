@@ -27,12 +27,12 @@
         {{else}}
             <h4>ADULT SIZES:</h4>
         {{/ifCond}}
-        <form method="post" action="/addToCart/{{data.product_id}}">
+        <form id="to-cart" method="post" action="/addToCart/{{data.product_id}}">
         {{#each data.sizes as |value key| }}
             {{#ifCond key '!=' 'product_id'}}
                 {{#ifCond key '!=' 'is_youth'}}
                     {{#ifCond value '==' 1}}
-                        <input type="radio" id={{key}} value={{key}}>
+                        <input type="radio" name="size" id={{key}} value={{key}}>
                         <label for={{key}}>{{key}}</label>
                     {{/ifCond}}
                 {{/ifCond}}

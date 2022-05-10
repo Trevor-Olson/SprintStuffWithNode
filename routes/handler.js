@@ -133,6 +133,7 @@ router.post('/addToCart/:product_id', (req, res) => {
     let { product_id } = req.params;
     // get the size of the size
     const {size} = req.query;
+    console.log( 'size:', size );
     // get the color of the size
     const {color} = req.query;
     // get the quantity of the size
