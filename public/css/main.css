@@ -3,14 +3,13 @@ body {
   margin: auto;
   position: relative;
   height: 100vh;
-  width: 100%;
-  max-width: 1200px;
+  width: 1200px;
   background-image: url("/images/background.jpg");
   background-size: cover;
   background-color: azure;
   text-align: center;
   color: white;
-  overflow-x: hidden;
+  overflow: auto;
 }
 
 #page-container{

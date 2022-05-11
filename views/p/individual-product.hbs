@@ -4,55 +4,73 @@
     <a href="/products?category={{data.category}}&type={{data.type}}">{{data.type}}</a> / 
     {{data.name}}
 </div>
-
-<div class="individual-product" id={{data.product_id}}>
-    <div class="individual-product-image-container">
-        <img class="individual-product-image" 
-            src="/images/products/{{data.category}}/{{data.type}}/{{data.image}}1.jpg" 
-            alt="">
+<div class="individual-product-container">
+    <div class="individual-product" id={{data.product_id}}>
+        <div class="individual-product-image-container">
+            <img class="individual-product-image" 
+                src="/images/products/{{data.category}}/{{data.type}}/{{data.image}}1.jpg" 
+                alt="">
+        </div>
     </div>
-</div>
-<div id="individual-product-details">
-    <p id="individual-product-price">${{data.price}}</p>
-    <h1 id="individual-product-name">{{data.name}}</h1>
-    
-    <div id="individual-product-description">
-        <h4>DESCRIPTION</h4>
-        <p id="individual-product-description">{{data.description}}</p>
-    </div>
-    <form id="to-cart" method="post" action="/addToCart/{{data.product_id}}">
-        {{#ifCond data.type '==' 'Clothing'}}
-            {{#ifCond data.sizes.is_youth '==' 1 }}
-                <h4>YOUTH SIZES:</h4>
-            {{else}}
-                <h4>ADULT SIZES:</h4>
-            {{/ifCond}}
-            <!-- size select -->
-            {{#each data.sizes as |value key| }}
-                {{#ifCond key '!=' 'product_id'}}
-                    {{#ifCond key '!=' 'is_youth'}}
-                        {{#ifCond value '==' 1}}
-                            <input type="radio" name="size" id="{{key}}" 
-                                value="{{key}}" checked>
-                            <label for={{key}}>{{key}}</label>
+    <div id="individual-product-details">
+        <p id="individual-product-price">${{data.price}}</p>
+        <h1 id="individual-product-name">{{data.name}}</h1>
+        
+        <div id="individual-product-description">
+            <h4>DESCRIPTION</h4>
+            <p id="individual-product-description">{{data.description}}</p>
+        </div>
+        <form id="to-cart" method="post" action="/addToCart/{{data.product_id}}">
+            {{#ifCond data.type '==' 'Clothing'}}
+                {{#ifCond data.sizes.is_youth '==' 1 }}
+                    <h4>YOUTH SIZES:</h4>
+                {{else}}
+                    <h4>ADULT SIZES:</h4>
+                {{/ifCond}}
+                <!-- size select -->
+                {{#each data.sizes as |value key| }}
+                    {{#ifCond key '!=' 'product_id'}}
+                        {{#ifCond key '!=' 'is_youth'}}
+                            {{#ifCond value '==' 1}}
+                                <input type="radio" name="size" id="{{key}}" 
+                                    value="{{key}}" checked>
+                                <label for={{key}}>{{key}}</label>
+                            {{/ifCond}}
                         {{/ifCond}}
                     {{/ifCond}}
-                {{/ifCond}}
-            {{/each}}
-            <!-- color select -->
-            <h4>COLORS:</h4>
-            {{#each data.colors as |value key| }}
-                {{#ifCond key '!=' 'color_id'}}
-                    <input type="radio" name="color" id="{{key}}" 
-                        value="{{key}}" checked>
-                    <label for={{key}}>{{value}}</label>
-                {{/ifCond}}
-            {{/each}}       
-        {{/ifCond}}
-        <!-- Quantity -->
-        <h4>QUANTITY:</h4>
-        <input type="number" name="quantity" min="1" max="100" value="1">
-        <input type="hidden" name="product_id" value="{{data.product_id}}">
-        <br><br><button class="add-to-cart" type="submit">Add to Cart</button>
-    </form>
+                {{/each}}
+                <!-- color select -->
+                <h4>COLORS:</h4>
+                {{#each data.colors as |value key| }}
+                    {{#ifCond key '!=' 'color_id'}}
+                        <input type="radio" name="color" id="{{key}}" 
+                            value="{{key}}" checked>
+                        <label for={{key}}>{{value}}</label>
+                    {{/ifCond}}
+                {{/each}}       
+            {{/ifCond}}
+            <!-- Quantity -->
+            <h4>QUANTITY:</h4>
+            <input type="number" name="quantity" min="1" max="100" value="1">
+            <input type="hidden" name="product_id" value="{{data.product_id}}">
+            <br><br><button class="add-to-cart" type="submit">Add to Cart</button>
+        </form>
+    </div>
+</div>
+
+
+<div class="similar-product-listing">
+    <h4>OTHER PRODUCTS YOU MIGHT LIKE</h4>
+    {{#each data.similarProducts}}
+    <div class="similar-product" id={{this.product_id}}>
+        <a href="/p/{{this.product_id}}">
+            <div class="similar-product-image-container">
+                <img class="similar-product-image" 
+                    src="/images/products/{{this.category}}/{{this.type}}/{{this.image}}1.jpg" 
+                    alt="">
+            </div>
+        </a>
+        <p>{{this.name}}</p>
+    </div>
+    {{/each}}
 </div>
