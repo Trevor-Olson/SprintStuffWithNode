@@ -104,9 +104,16 @@ const orm = {
                 console.log(err);
             }
             if (data.length === 0) {
-                sqlQuery = `INSERT INTO cart ( user_id, product_id, quantity, 
+                if( clothing ) {
+                    sqlQuery = `INSERT INTO cart ( user_id, product_id, quantity, 
                     size, color_id ) VALUES
                     ( ${userid}, ${productid}, ${qty}, "${size}", ${color} );`
+                }
+                else {
+                    sqlQuery = `INSERT INTO cart ( user_id, product_id, quantity ) VALUES
+                        ( ${userid}, ${productid}, ${qty} );`
+                }
+                
                 connection.query(sqlQuery);
             }
             else {
