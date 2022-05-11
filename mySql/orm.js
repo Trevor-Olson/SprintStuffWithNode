@@ -79,19 +79,21 @@ const orm = {
         // check if product is in the cart
         let sqlQuery = '';
         // if it doesn't have a size or a color change the query
-        if( size == null && color == null )
-        {
-            sqlQuery = `SELECT quantity FROM cart 
-                            WHERE user_id = ${userid} 
-                            AND product_id = ${productid};`;
-        }
-        else
+        let clothing = ( size != null && color != null );
+        if( clothing )
         {
             sqlQuery = `SELECT quantity FROM cart 
                             WHERE user_id = ${userid} 
                             AND product_id = ${productid}
                             AND size = "${size}"
                             AND color_id = ${color};`;
+            
+        }
+        else
+        {
+            sqlQuery = `SELECT quantity FROM cart 
+                            WHERE user_id = ${userid} 
+                            AND product_id = ${productid};`;
         }
         connection.query( sqlQuery, function(err, data) {
             if( err )
@@ -107,27 +109,65 @@ const orm = {
             }
             else{
                 let quantity = qty + data[0].quantity;
-                sqlQuery = `UPDATE cart SET quantity = ${quantity} 
-                WHERE user_id = ${userid} 
-                    AND product_id = ${productid}
-                    AND size = "${size}"
-                    AND color_id = ${color};`
+                if( clothing )
+                {
+                    sqlQuery = `UPDATE cart SET quantity = ${quantity} 
+                                WHERE user_id = ${userid} 
+                                AND product_id = ${productid}
+                                AND size = "${size}"
+                                AND color_id = ${color};`
+                }
+                else
+                {
+                    sqlQuery = `UPDATE cart SET quantity = ${quantity} 
+                                WHERE user_id = ${userid} 
+                                AND product_id = ${productid};`
+                }
+                
                 connection.query( sqlQuery );
             }
         });
     },
-    removeFromCart( userid, productid ) {
+    removeFromCart( userid, productid, qty = 1, size = null, color = null ) {
         // check if product is in the cart
-        let sqlQuery = `SELECT quantity FROM cart WHERE user_id = ${userid} AND
-            product_id = ${productid};`;
+        let sqlQuery = '';
+        // if it doesn't have a size or a color change the query
+        let clothing = ( size != null && color != null );
+        if( clothing )
+        {
+            sqlQuery = `SELECT quantity FROM cart 
+                        WHERE user_id = ${userid} 
+                        AND product_id = ${productid}
+                        AND size = "${size}"
+                        AND color_id = ${color};`;
+            
+        }
+        else
+        {
+            sqlQuery = `SELECT quantity FROM cart 
+                        WHERE user_id = ${userid} 
+                        AND product_id = ${productid};`;
+        }
         connection.query( sqlQuery, function(err, data) {
             if( data.length === 0 )
-            {
+            { 
                 return;
             }
             else{
-                sqlQuery = `DELETE FROM cart WHERE user_id = ${userid} AND
-                    product_id = ${productid};`
+                if( clothing )
+                {
+                    sqlQuery = `DELETE FROM cart 
+                                WHERE user_id = ${userid} 
+                                AND product_id = ${productid}
+                                AND size = "${size}"
+                                AND color_id = ${color};`
+                }
+                else
+                {
+                    sqlQuery = `DELETE FROM cart 
+                                WHERE user_id = ${userid} 
+                                AND product_id = ${productid};`
+                }
                 connection.query( sqlQuery );
             }
         });

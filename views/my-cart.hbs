@@ -3,6 +3,7 @@
 <div class="cart-product-listing">
     {{#each products}}
     <div class="cart-product" id={{product_id}}>
+        
         <a href="/p/{{product_id}}">
             <div class="cart-product-image-container">
                 <img class="cart-product-image" 
@@ -25,8 +26,12 @@
                     <td>Total Price: ${{totalprice}}</td>
                 </tr>
             </table>
-        </div>
+        </div> 
         <form method="post" action="/removeFromCart/{{product_id}}">
+            <input type="hidden" name="product_id" value="{{product_id}}">
+            <input type="hidden" name="color" value="{{color_id}}">
+            <input type="hidden" name="size" value="{{size}}">
+            <input type="hidden" name="quantity" value="1">
             <button class="remove-from-cart" type="submit">Remove From Cart</button>
         </form>
     </div>

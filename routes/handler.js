@@ -147,9 +147,15 @@ router.post('/removeFromCart/:product_id', (req, res) => {
     // get the user's id
     const userid = 1;
     // get the product id
-    let { product_id } = req.params;
+    let product_id = req.body.product_id;
+    // get the size
+    const size = req.body.size;
+    // get the color
+    const color = req.body.color;
+    // get the quantity
+    const quantity = parseInt(req.body.quantity);
     // get the product information from a mySQL database
-    orm.removeFromCart( userid, product_id );
+    orm.removeFromCart( userid, product_id, quantity, size, color );
     res.redirect( 'back' );
 });
 
