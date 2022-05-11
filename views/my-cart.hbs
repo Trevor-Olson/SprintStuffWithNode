@@ -11,9 +11,20 @@
             </div>
         </a>
         <div class="cart-product-description">
-            <p>{{name}}</p>
-            <p>Quantity: {{quantity}}</p>
-            <p>Total Price: ${{totalprice}}</p>
+            <table class="cart-table">
+                <caption>{{color_name}} {{name}}</caption>
+                {{#ifCond size '!=' 'null'}}
+                <tr>
+                    <td>Size: {{size}}</td>
+                </tr>
+                {{/ifCond}}
+                <tr>
+                    <td>Quantity: {{quantity}}</td>
+                </tr>
+                <tr>
+                    <td>Total Price: ${{totalprice}}</td>
+                </tr>
+            </table>
         </div>
         <form method="post" action="/removeFromCart/{{product_id}}">
             <button class="remove-from-cart" type="submit">Remove From Cart</button>

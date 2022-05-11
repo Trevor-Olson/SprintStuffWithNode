@@ -133,9 +133,11 @@ const orm = {
         });
     },
     getCart( userid, cb ){
-        const sqlQuery = `SELECT p.product_id, p.name, p.category, p.type, p.image, p.price, c.quantity, 
-            p.price * c.quantity AS "totalprice"
-            FROM products AS p JOIN cart c ON p.product_id = c.product_id
+        const sqlQuery = `SELECT p.name, p.category, p.type, p.image, p.price, c.*, 
+            p.price * c.quantity AS "totalprice", colors.color_name
+            FROM cart c
+            JOIN products p ON p.product_id = c.product_id
+            LEFT JOIN colors ON c.color_id = colors.color_id
             WHERE c.user_id = ${userid};`;
         connection.query( sqlQuery, function(err, data){
             if(err){
