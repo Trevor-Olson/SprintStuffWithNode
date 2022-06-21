@@ -8,8 +8,9 @@
     <div class="individual-product" id={{data.product_id}}>
         <div class="individual-product-image-container">
             <img class="individual-product-image" 
-                src="/images/products/{{data.category}}/{{data.type}}/{{data.image}}1.jpg" 
-                alt="">
+                src="/images/products/{{data.category}}/{{data.type}}/{{data.image}}/1.jpg" 
+                alt={{data.name}}>
+            <div class="image-Description"><p>{{data.images.0.image_description}}</p></div>
         </div>
     </div>
     <div id="individual-product-details">
@@ -29,24 +30,20 @@
                 {{/ifCond}}
                 <!-- size select -->
                 {{#each data.sizes as |value key| }}
-                    {{#ifCond key '!=' 'product_id'}}
-                        {{#ifCond key '!=' 'is_youth'}}
-                            {{#ifCond value '==' 1}}
-                                <input type="radio" name="size" id="{{key}}" 
-                                    value="{{key}}" checked>
-                                <label for={{key}}>{{key}}</label>
-                            {{/ifCond}}
+                    {{#ifCond key '!=' 'is_youth'}}
+                        {{#ifCond value '==' 1}}
+                            <input type="radio" name="size" id="{{key}}" 
+                                value="{{key}}" checked>
+                            <label for={{key}}>{{key}}</label>
                         {{/ifCond}}
                     {{/ifCond}}
                 {{/each}}
                 <!-- color select -->
                 <h4>COLORS:</h4>
-                {{#each data.colors as |value key| }}
-                    {{#ifCond key '!=' 'color_id'}}
-                        <input type="radio" name="color" id="{{key}}" 
-                            value="{{key}}" checked>
-                        <label for={{key}}>{{value}}</label>
-                    {{/ifCond}}
+                {{#each data.colorNames as |value key| }}
+                    <input type="radio" name="color" id="{{key}}" 
+                        value="{{key}}" checked>
+                    <label for={{key}}>{{value}}</label>        
                 {{/each}}       
             {{/ifCond}}
             <!-- Quantity -->
@@ -66,7 +63,7 @@
         <a href="/p/{{this.product_id}}">
             <div class="similar-product-image-container">
                 <img class="similar-product-image" 
-                    src="/images/products/{{this.category}}/{{this.type}}/{{this.image}}1.jpg" 
+                    src="/images/products/{{this.category}}/{{this.type}}/{{this.image}}/1.jpg" 
                     alt="">
             </div>
         </a>

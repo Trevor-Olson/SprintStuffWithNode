@@ -48,37 +48,53 @@ const orm = {
                     cb(err, null);
                 }
                 data[0]['similarProducts'] = simData;
-                if (data[0].type == 'Clothing') {
-                    // get the sizes
-                    const sizeQuery = `SELECT s.* FROM sizes as s 
-                        JOIN products as p ON s.product_id = p.product_id
-                        WHERE p.product_id = ${id};`;
-                    connection.query(sizeQuery, function (err, sizeData) {
-                        if (err) {
-                            cb(err, null);
-                        }
-                        data[0]['sizes'] = sizeData[0];
-                        // get the colors
-                        const colorQuery = `SELECT c.color_id, c.color_name 
-                            FROM colors as c 
-                            JOIN products as p ON c.product_id = p.product_id
+                // get the images
+                const imgQuery = `SELECT image_id, image_description FROM images WHERE product_id = ${id};`;
+                connection.query( imgQuery, function( err, imgData ) {
+                    if (err) {
+                        cb(err, null);
+                    }
+                    console.log( imgData[0]['image_description'] );
+                    data[0]['images'] = imgData;
+                    // clothing only data
+                    if (data[0].type == 'Clothing') {
+                        // get the sizes
+                        const sizeQuery = `SELECT s.* FROM sizes as s 
+                            JOIN products as p ON s.product_id = p.product_id
                             WHERE p.product_id = ${id};`;
-                        connection.query(colorQuery, function (err, colorData) {
+                        connection.query(sizeQuery, function (err, sizeData) {
                             if (err) {
                                 cb(err, null);
                             }
-                            data[0]['colors'] = {}
-                            for (d in colorData) {
-                                data[0]['colors'][colorData[d].color_id] = colorData[d].color_name;
-                            }
-                            cb(null, data)
+                            data[0]['sizes'] = sizeData[0];
+                            // change the key name to a more readible phrase
+                            data[0]['sizes']['One Size Fits Most'] = data[0]['sizes']['one_size']
+                            // remove unneccessary key value pairs
+                            delete data[0]['sizes']['one_size']
+                            delete data[0]['sizes']['product_id']
+                            // get the colors
+                            const colorQuery = `SELECT c.color_id, c.color_name
+                                FROM colors as c 
+                                JOIN products as p ON c.product_id = p.product_id
+                                WHERE p.product_id = ${id};`;
+                            connection.query(colorQuery, function (err, colorData) {
+                                if (err) {
+                                    cb(err, null);
+                                }
+                                data[0]['colorNames'] = {}
+                                for (d in colorData) {
+                                    data[0]['colorNames'][colorData[d].color_id] = colorData[d].color_name;
+                                    }
+                                cb(null, data)
+                            })
                         })
-                    })
-                }
-                else {
-                    cb(null, data)
-                }
+                    }
+                    else {
+                        cb(null, data)
+                    }
+                })
             })
+                
         });
     },
     addToCart(userid, productid, qty = 1, size = null, color = null) {

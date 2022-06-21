@@ -54,6 +54,25 @@
     right: 0;
     margin: auto;
   }
+
+  .image-Description{
+    position: absolute;
+    top: 95%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 10%;
+    color: white;
+    line-height: 100%;
+    background-color: #464646;
+    visibility: hidden;
+  }
+
+  .individual-product-image-container:hover > .image-Description {
+    visibility: visible; 
+  }
+
+  
   
   #individual-product-details{
     height: 500px;

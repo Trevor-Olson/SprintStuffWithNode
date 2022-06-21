@@ -63,9 +63,12 @@ CREATE TABLE colors
 );
 
 INSERT INTO colors ( product_id, color_name ) VALUES
-	( 1, "Black with Flourescent Orange"),
+	( 1, "Black / Flourescent Orange"),
+    ( 1, "Grey Steel / Neon Blue"),
+    ( 1, "Grey Steel / Neon Pink"),
+    ( 1, "Grey Steel / Neon Yellow"),
     ( 3, "Black and White"),
-	( 8, "Black"  );
+	( 8, "Black");
 
 CREATE TABLE sizes
 (
@@ -93,6 +96,31 @@ INSERT INTO sizes ( product_id, is_youth, XS, SM, MED, LRG, XL,
     ( 3, False, False, True, True, True, True, True, True, False, False  ),
 	( 8, True, True, True, True, True, False, False, False, False, False  );
 
+CREATE TABLE images
+(
+        product_id	        INT unsigned NOT NULL,
+        image_id	        INT unsigned NOT NULL,
+        image_description	VARCHAR(150) NOT NULL,
+        PRIMARY KEY (product_id, image_id),
+        FOREIGN KEY (product_id)
+            REFERENCES products(product_id)
+            ON DELETE CASCADE
+            ON UPDATE CASCADE
+);
+
+INSERT INTO images ( product_id, image_id, image_description ) VALUES
+        ( 1, 1, "Black / Flourescent Orange Men's Hat" ),
+        ( 1, 2, "Grey Steel / Neon Blue Men's Hat" ),
+        ( 1, 3, "Grey Steel / Neon Pink Men's Hat" ),
+        ( 1, 4, "Grey Steel / Neon Yellow Men's Hat" ),
+        ( 2, 1, "Winged Pull Back Examples"),
+        ( 3, 1, "Black and White OnBoard Men's T-Shirt"),
+        ( 4, 1, "1/24th Racing Champion Example Right Side" ),
+        ( 5, 1, "1/28th GMP Example Right Side" ),
+        ( 6, 1, "1/24th Non-Wing Racing Champion Example Right Side"),
+        ( 7, 1, "1/18th Non-Wing Racing Champion Example Right Side"),
+	( 8, 1, "Black Kid's T-Shirt"),
+        ( 9, 1, "Modified 9\" Hanger Example" );
 
 
 
