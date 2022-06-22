@@ -5,7 +5,7 @@
 {{/if}}
 
 <div id="product-navigation">
-    <p class="product-navigation-titles">Categories</p>
+    <p class="product-navigation-titles">Racing Categories</p>
     <input type="checkbox" onclick="editUrlParameter('category', 'Winged')"
     id="Winged">
     <label>Winged Sprint Cars</label><br>
@@ -27,7 +27,7 @@
 
 <div class="product-listing">
     {{#each products}}
-    <div class="product" id={{product_id}}>
+    <div class="product" id={{product_id}} category={{category}} type={{type}}>
         <a href="/p/{{product_id}}">
             <div class="product-image-container">
                 <img class="product-image" 
@@ -39,26 +39,3 @@
     </div>
     {{/each}}
 </div>
-
-<script type="text/javascript">
-    function isChecked(){
-        var searchParams = new URLSearchParams(window.location.search)
-        if( searchParams.get( 'category' ) == 'Winged' )
-        {
-            document.getElementById('Winged').setAttribute('checked', 'true')
-        }
-        else if( searchParams.get( 'category' ) == 'Non-Winged' )
-        {
-            document.getElementById('Non-Winged').setAttribute('checked', 'true')
-        }
-        if( searchParams.get( 'type' ) == 'Clothing' )
-        {
-            document.getElementById('Clothing').setAttribute('checked', 'true')
-        }
-        else if( searchParams.get( 'type' ) == 'Hand-Painted' )
-        {
-            document.getElementById('Hand-Painted').setAttribute('checked', 'true')
-        }
-    }
-    window.onchange = isChecked();
-</script>

@@ -83,7 +83,10 @@ router.all('/:page', (req, res) => {
     let { page } = req.params;
     // give the page name a capitol letter for the title
     let pagename = page[0].toUpperCase() + page.substring(1);
-    res.render( page, { title: ` - ${pagename} Page` }, (err, html) => {
+    res.render( page, 
+        { title: ` - ${pagename} Page`,
+          style: `/css/${pagename}.css`
+        }, (err, html) => {
         if (err) {
             // if the page can't be found send 404
             res.status(404).send('<h1>Page doesn\'t exist</h1>');

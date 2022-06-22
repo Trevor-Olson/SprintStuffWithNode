@@ -4,9 +4,9 @@ body {
   position: relative;
   height: 100vh;
   width: 1200px;
+  background-color: black;
   background-image: url("/images/background.jpg");
   background-size: cover;
-  background-color: azure;
   text-align: center;
   color: white;
   overflow: auto;
@@ -26,4 +26,15 @@ body {
 #page-title{
   width: 100%;
   display: inline-block;
+}
+
+.mySlideShow{
+  height: 600px;
+  width: 100%;
+}
+
+.mySlides{
+  height: inherit;
+  width: auto;
+  margin: auto;
 }
